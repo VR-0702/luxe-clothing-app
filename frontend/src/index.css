@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---- LUXE Design Tokens ---- */
+:root {
+  --gold: #D4AF37;
+  --gold-light: #f2d060;
+  --gold-dark: #b8940f;
+  --black: #0a0a0a;
+  --dark: #111111;
+  --charcoal: #1a1a1a;
+  --cream: #fafaf7;
+  --light: #f5f5f0;
+}
+
+/* ---- Base Styles ---- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background-color: var(--cream);
+  color: var(--black);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---- Custom Scrollbar ---- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-dark);
+}
+
+/* ---- Selection ---- */
+::selection {
+  background: rgba(212, 175, 55, 0.25);
+  color: var(--black);
+}
+
+/* ---- Reusable Component Styles ---- */
+@layer components {
+
+  /* Gold underline hover effect */
+  .hover-gold-underline {
+    position: relative;
+  }
+  .hover-gold-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+  .hover-gold-underline:hover::after {
+    width: 100%;
+  }
+
+  /* Premium button styles */
+  .btn-primary {
+    @apply bg-luxe-black text-white px-8 py-3 text-sm tracking-widest uppercase
+           hover:bg-gold-500 transition-all duration-300 font-sans font-medium;
+  }
+
+  .btn-outline {
+    @apply border border-luxe-black text-luxe-black px-8 py-3 text-sm tracking-widest uppercase
+           hover:bg-luxe-black hover:text-white transition-all duration-300 font-sans font-medium;
+  }
+
+  .btn-gold {
+    @apply bg-gold-500 text-luxe-black px-8 py-3 text-sm tracking-widest uppercase
+           hover:bg-gold-600 transition-all duration-300 font-sans font-medium;
+  }
+
+  /* Input styles */
+  .input-luxe {
+    @apply w-full border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-gold-500
+           bg-white transition-colors duration-200 font-sans;
+  }
+
+  /* Card styles */
+  .card-luxe {
+    @apply bg-white border border-gray-100 hover:shadow-lg transition-shadow duration-300;
+  }
+
+  /* Section headings */
+  .section-title {
+    @apply font-display text-3xl md:text-4xl font-medium text-luxe-black;
+  }
+
+  .section-subtitle {
+    @apply font-serif text-gray-500 text-lg italic;
+  }
+
+  /* Gold divider line */
+  .gold-divider {
+    @apply flex items-center gap-4;
+  }
+  .gold-divider::before,
+  .gold-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+
+  /* Skeleton loading */
+  .skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+  }
+
+  /* Badge */
+  .badge-gold {
+    @apply bg-gold-500 text-luxe-black text-xs font-medium px-2.5 py-0.5 tracking-wide uppercase;
+  }
+
+  /* Status badges */
+  .status-placed    { @apply bg-blue-50 text-blue-700 border border-blue-200; }
+  .status-confirmed { @apply bg-purple-50 text-purple-700 border border-purple-200; }
+  .status-processing{ @apply bg-yellow-50 text-yellow-700 border border-yellow-200; }
+  .status-packed    { @apply bg-orange-50 text-orange-700 border border-orange-200; }
+  .status-shipped   { @apply bg-indigo-50 text-indigo-700 border border-indigo-200; }
+  .status-delivered { @apply bg-green-50 text-green-700 border border-green-200; }
+  .status-cancelled { @apply bg-red-50 text-red-700 border border-red-200; }
+  .status-returned  { @apply bg-gray-50 text-gray-700 border border-gray-200; }
+}
+
+/* ---- Animations ---- */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Swiper customization ---- */
+.swiper-pagination-bullet-active {
+  background: var(--gold) !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--gold) !important;
+}
+
+/* ---- No scrollbar utility ---- */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
