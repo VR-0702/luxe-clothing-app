@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {
-  getDashboardStats, getAllUsers, updateUser,
+  getDashboardStats, getAllUsers, updateUser, deleteUser,
   createWorker, getCoupons, createCoupon, updateCoupon, deleteCoupon
 } = require('../controllers/adminController');
 const {
@@ -16,6 +16,7 @@ router.use(protect, restrictTo('admin'));
 router.get('/dashboard', getDashboardStats);
 router.get('/users', getAllUsers);
 router.put('/users/:id', updateUser);
+router.delete('/users/:id', deleteUser);
 router.post('/workers', createWorker);
 
 router.get('/orders', getAllOrders);
